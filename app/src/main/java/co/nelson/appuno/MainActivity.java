@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
    TextView nombreUsuario;
-   Button btn1,btn2;
+   Button btn1, btn2, send;
    String Tag = "Prueba";
 
     @Override
@@ -19,21 +19,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-    }
-
-    /*public double calcularArea(int l1,int l2){
-        return l1*l2;
-    }*/
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(Tag, "Estoy en onStart");
         nombreUsuario = (TextView) findViewById(R.id.usuario);
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
-
+        send = findViewById(R.id.btnsend);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +38,34 @@ public class MainActivity extends AppCompatActivity {
                 nombreUsuario.setText("Presioné Boton Dos");
             }
         });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //pasarIndormacion();
+                String textoActual = nombreUsuario.getText().toString();
+                //String nombre = "Juan Carlos";
+                Intent pasarInfo = new Intent(this, PantallaDos.class);
+                pasarInfo.putExtra("name", nombre);
+                startActivity(pasarInfo);
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(Tag, "Estoy en onStart");
+
+        
+        /*
+        private void pasarIndormacion(){
+        String textoActual = nombreUsuario.getText().toString();
+                //String nombre = "Juan Carlos";
+                Intent pasarInfo = new Intent(this, PantallaDos.class);
+                pasarInfo.putExtra("name", nombre);
+                startActivity(pasarInfo);
+        }*/
     }
 
     @Override
@@ -78,11 +95,29 @@ public class MainActivity extends AppCompatActivity {
         Log.i(Tag, "Estoy en onRestart");
         nombreUsuario.setText(nombreUsuario.getText().toString() + "Estoy en onRestart");
     }
-
+    
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i(Tag, "Estoy en onDestroy");
         nombreUsuario.setText(nombreUsuario.getText().toString() + "Estoy en onDestroy");
     }
+
+    /*
+    @Override
+    public void onClick(View view){
+        if(!user.getText().toString().isEmpty() && !password.getText().)
+        Toast.maketext(MainActivity.this, "Correctos"),
+        //Crear alarma
+        enviarPantallaDos();
+    }
+
+    @Override
+    private void enviarPantallaDos(){
+        String pass = password.getText().toString();
+        Intent intent = new Intent(this, PantallaDos.class);
+        intent.putExtra("password", pass);
+        startActivity(intent);
+        log.i("intent", "" + pass);
+    }*/
 }
